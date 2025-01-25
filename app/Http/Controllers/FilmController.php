@@ -143,6 +143,7 @@ class FilmController extends Controller
         $films = FilmController::readFilms();
 
         $filmNumber = collect($films)->count();
+        
         return view("films.filmCount", ["filmNumber" => $filmNumber, "title" => $title]);
     }
 }
