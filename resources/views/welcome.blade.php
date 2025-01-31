@@ -13,13 +13,34 @@
 </head>
 
 <body class="container">
+    
+        <div>
+            <h1 class="mt-4">Lista de Peliculas</h1>
+            <ul>
+                <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
+                <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
+                <li><a href=/filmout/films>Pelis</a></li>
+                <li><a href=/filmout/sortFilms>Pelis ordenadas por año descendiente</a></li>
+                <li><a href=/filmout/countFilms>Contar pelis</a></li>
+            </ul>
+        </div>
+        <div>
+            <h1 class="mt-4">Insertar Películas</h1>
+            @if (!empty($status))
+                <p style="color:red;">{{$status}}</p>
+            @endif
+            <form action="{{route("/filmin/createFilm")}}" method="POST">
+                {{crsf_field()}}
+                Nombre: <input type="text" name="filmName" id="filmName" placeholder="Film Name"><br>
+                Año: <input type="text" name="filmYear" id="filmYear" placeholder="Film Year"><br>
+                País: <input type="text" name="filmCountry" id="filmCountry" placeholder="Film Country"><br>
+                Duración: <input type="text" name="filmDuration" id="filmNamDurationlaceholder" placeholder="Film Duration"><br>
+                Imagen URL: <input type="text" name="filmUrl" id="filmUrl" placeholder="Film Url"><br>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
 
-    <h1 class="mt-4">Lista de Peliculas</h1>
-    <ul>
-        <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
-        <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
-        <li><a href=/filmout/films>Pelis</a></li>
-    </ul>
+
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
