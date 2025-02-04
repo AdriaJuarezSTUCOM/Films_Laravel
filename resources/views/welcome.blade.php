@@ -29,13 +29,13 @@
             @if (!empty($status))
                 <p style="color:red;">{{$status}}</p>
             @endif
-            <form action="{{route("/filmin/createFilm")}}" method="POST">
-                {{crsf_field()}}
+            <form action="{{route("createFilm")}}" method="POST">
+                {{csrf_field()}}
                 Nombre: <input type="text" name="filmName" id="filmName" placeholder="Film Name"><br>
-                Año: <input type="text" name="filmYear" id="filmYear" placeholder="Film Year"><br>
+                Año: <input type="number" name="filmYear" id="filmYear" placeholder="Film Year"><br>
                 País: <input type="text" name="filmCountry" id="filmCountry" placeholder="Film Country"><br>
-                Duración: <input type="text" name="filmDuration" id="filmNamDurationlaceholder" placeholder="Film Duration"><br>
-                Imagen URL: <input type="text" name="filmUrl" id="filmUrl" placeholder="Film Url"><br>
+                Duración: <input type="number" name="filmDuration" id="filmNamDurationlaceholder" placeholder="Film Duration"><br>
+                Imagen URL: <input type="url" name="imageUrl" id="imageUrl" placeholder="image Url"><br>
                 <button type="submit">Enviar</button>
             </form>
         </div>

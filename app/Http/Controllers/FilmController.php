@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Request;
 
 class FilmController extends Controller
 {
@@ -147,8 +148,11 @@ class FilmController extends Controller
         return view("films.filmCount", ["filmNumber" => $filmNumber, "title" => $title]);
     }
 
-    public function createFilm()
+    public function createFilm(Request $request)
     {
-        return view("films.list", []);
+        $film = $request->toArray();
+        dd($film);
+
+        // return view("welcome", ["status"=>"hola"]);
     }
 }

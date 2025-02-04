@@ -12,7 +12,7 @@
     
             // in case year is not numeric go to homepage
             if(isset($url)){
-                if(is_null($url) || !is_numeric($url)){
+                if(is_null($url)){
                       return redirect('/');
                 }
             }

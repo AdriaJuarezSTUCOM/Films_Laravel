@@ -34,7 +34,7 @@ Route::middleware('year')->group(function() {
 
 Route::middleware('url')->group(function() {
     Route::group(['prefix'=>'filmin'], function(){
-        // Routes included with prefix "filmout"
+        // Routes included with prefix "filmin"
         Route::post('createFilm/',[FilmController::class, "createFilm"])->name('createFilm');
     });
 });
