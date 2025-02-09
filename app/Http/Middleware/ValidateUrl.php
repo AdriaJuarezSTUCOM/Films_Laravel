@@ -8,14 +8,13 @@
     class ValidateUrl{
         public function handle(Request $request, Closure $next)
         {
-            $url = $request->route('url');
-    
-            // in case year is not numeric go to homepage
-            if(isset($url)){
-                if(is_null($url)){
-                      return redirect('/');
-                }
-            }
-            return $next($request);        
+            $url = $request->input('img_url');
+
+            // Verifica que la URL sea válida
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                return redirect('/')->withErrors(["status" => 'Error: URL de la imagen no válida']);
+            }       
+
+            return $next($request);
         }
     }

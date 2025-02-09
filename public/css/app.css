@@ -1,0 +1,35 @@
+header, footer{
+    background-color: rgb(212, 211, 211);
+    padding-bottom: 20px;
+}
+
+.header-img{
+    width: 70%;
+    height:150px;
+}
+
+.footer-img{
+    width: 70%;
+    height:150px;
+}
+
+body{
+    background-color: rgb(238, 238, 238);
+}
+
+form{
+    padding-bottom: 20px;
+}
+
+.table{
+    margin-left:0px;
+    width: fit-content;
+}
+
+input{
+    margin-bottom: 2px;
+}
+
+header, h1, ul, form, footer, p, .tableContainer{
+    padding-left: 30%;
+}

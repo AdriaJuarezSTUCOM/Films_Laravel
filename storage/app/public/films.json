@@ -1,9 +1,9 @@
 [
     {
-        "name": "La Rosa Púrpura del Cairo",
+        "name": "La Rosa P\u00farpura del Cairo",
         "year": 1985,
         "genre": "Drama",
-        "img_url": "https://es.web.img2.acsta.net/medias/nmedia/18/79/45/34/20253823.jpg",
+        "img_url": "https:\/\/es.web.img2.acsta.net\/medias\/nmedia\/18\/79\/45\/34\/20253823.jpg",
         "country": "example country",
         "duration": 165
     },
@@ -11,7 +11,7 @@
         "name": "El Club de los Cinco",
         "year": 1985,
         "genre": "Comedia",
-        "img_url": "https://pics.filmaffinity.com/El_club_de_los_cinco-192309838-large.jpg",
+        "img_url": "https:\/\/pics.filmaffinity.com\/El_club_de_los_cinco-192309838-large.jpg",
         "country": "example country",
         "duration": 165
     },
@@ -19,15 +19,15 @@
         "name": "Forrest Gump",
         "year": 1994,
         "genre": "Drama",
-        "img_url": "https://pics.filmaffinity.com/Forrest_Gump-212765827-large.jpg",
+        "img_url": "https:\/\/pics.filmaffinity.com\/Forrest_Gump-212765827-large.jpg",
         "country": "example country",
         "duration": 165
     },
     {
         "name": "Arrival",
         "year": 2016,
-        "genre": "Ciencia Ficción",
-        "img_url": "https://pics.filmaffinity.com/La_llegada-686966912-large.jpg",
+        "genre": "Ciencia Ficci\u00f3n",
+        "img_url": "https:\/\/pics.filmaffinity.com\/La_llegada-686966912-large.jpg",
         "country": "example country",
         "duration": 165
     },
@@ -35,8 +35,17 @@
         "name": "As Bestas",
         "year": 2022,
         "genre": "Drama",
-        "img_url": "https://pics.filmaffinity.com/As_bestas-275688233-large.jpg",
+        "img_url": "https:\/\/pics.filmaffinity.com\/As_bestas-275688233-large.jpg",
         "country": "example country",
         "duration": 165
+    },
+    {
+        "_token": "Pte0hkYxJpn4jXX0De1TfXmN1BQmXMTUKMyhs49D",
+        "name": "Oppenheimer",
+        "year": "2023",
+        "genre": "Drama hist\u00f3rico",
+        "country": "EEUU",
+        "duration": "180",
+        "img_url": "https:\/\/upload.wikimedia.org\/wikipedia\/donate\/5\/5b\/Oppenheimer_poster.jpg"
     }
 ]

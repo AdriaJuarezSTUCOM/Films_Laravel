@@ -148,11 +148,38 @@ class FilmController extends Controller
         return view("films.filmCount", ["filmNumber" => $filmNumber, "title" => $title]);
     }
 
+    public function isFilm($name)
+    {
+        $films = FilmController::readFilms();
+        // Verificar si la película ya existe (basado en el título y el año)
+        foreach ($films as $film) {
+            if (strtolower($film["name"]) === strtolower($name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function createFilm(Request $request)
     {
-        $film = $request->toArray();
-        dd($film);
+        // Leer las películas actuales
+        $films = FilmController::readFilms();
 
-        // return view("welcome", ["status"=>"hola"]);
+        // Convertir la solicitud en un array
+        $newFilm = $request->toArray();
+
+        // Comprobar si la película existe
+        if($this->isFilm($newFilm["name"])){
+            return view("welcome", ["status" => "Error: La película ya existe."]);
+        }
+
+        // Agregar la nueva película
+        $films[] = $newFilm;
+
+        // Guardar el array actualizado en el archivo JSON
+        Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
+
+        return $this->listFilms();
     }
+
 }

@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends("master")
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies List</title>
-
-    <!-- Add Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Include any additional stylesheets or scripts here -->
-</head>
-
-<body class="container">
+@section('content')
     
         <div>
             <h1 class="mt-4">Lista de Peliculas</h1>
@@ -31,11 +19,12 @@
             @endif
             <form action="{{route("createFilm")}}" method="POST">
                 {{csrf_field()}}
-                Nombre: <input type="text" name="filmName" id="filmName" placeholder="Film Name"><br>
-                Año: <input type="number" name="filmYear" id="filmYear" placeholder="Film Year"><br>
-                País: <input type="text" name="filmCountry" id="filmCountry" placeholder="Film Country"><br>
-                Duración: <input type="number" name="filmDuration" id="filmNamDurationlaceholder" placeholder="Film Duration"><br>
-                Imagen URL: <input type="url" name="imageUrl" id="imageUrl" placeholder="image Url"><br>
+                Nombre: <input type="text" name="name" id="name" placeholder="Film Name"><br>
+                Año: <input type="number" name="year" id="year" placeholder="Film Year"><br>
+                Género: <input type="text" name="genre" id="genre" placeholder="Film Genre"><br>
+                País: <input type="text" name="country" id="country" placeholder="Film Country"><br>
+                Duración: <input type="number" name="duration" id="duration" placeholder="Film Duration"><br>
+                Imagen URL: <input type="url" name="img_url" id="img_url" placeholder="image Url"><br>
                 <button type="submit">Enviar</button>
             </form>
         </div>
@@ -48,6 +37,4 @@
 
     <!-- Include any additional HTML or Blade directives here -->
 
-</body>
-
-</html>
+@endsection
