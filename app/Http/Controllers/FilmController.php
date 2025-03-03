@@ -161,25 +161,31 @@ class FilmController extends Controller
     }
 
     public function createFilm(Request $request)
-    {
-        // Leer las películas actuales
-        $films = FilmController::readFilms();
+{
+    // Leer las películas actuales
+    $films = FilmController::readFilms();
 
-        // Convertir la solicitud en un array
-        $newFilm = $request->toArray();
+    // Convertir la solicitud en un array
+    $newFilm = $request->toArray();
 
-        // Comprobar si la película existe
-        if($this->isFilm($newFilm["name"])){
-            return view("welcome", ["status" => "Error: La película ya existe."]);
-        }
-
-        // Agregar la nueva película
-        $films[] = $newFilm;
-
-        // Guardar el array actualizado en el archivo JSON
-        Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
-
-        return $this->listFilms();
+    // Validar que el año esté en el rango 1900-2024
+    if ($newFilm["year"] < 1900 || $newFilm["year"] > 2024) {
+        return view("welcome", ["status" => "Error: El año debe estar entre 1900 y 2024."]);
     }
+
+    // Comprobar si la película existe
+    if ($this->isFilm($newFilm["name"])) {
+        return view("welcome", ["status" => "Error: La película ya existe."]);
+    }
+
+    // Agregar la nueva película
+    $films[] = $newFilm;
+
+    // Guardar el array actualizado en el archivo JSON
+    Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
+
+    return $this->listFilms();
+}
+
 
 }
