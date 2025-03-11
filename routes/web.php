@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\FilmController;
 use App\Http\Middleware\ValidateYear;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,15 @@ Route::middleware('year')->group(function() {
         Route::get('filmsByGenre/{genre?}',[FilmController::class, "listFilmsByGenre"])->name('filmsByGenre');
         Route::get('sortFilms/',[FilmController::class, "sortFilms"])->name('sortFilms');
         Route::get('countFilms/',[FilmController::class, "countFilms"])->name('countFilms');
+    });
+});
+
+Route::middleware('year')->group(function() {
+    Route::group(['prefix'=>'actorout'], function(){
+        // Routes included with prefix "filmout"
+        Route::get('actors/',[ActorController::class, "listActors"])->name('actors');
+        Route::get('listActorsByDecade/{year?}',[ActorController::class, "listActorsByDecade"])->name('listActorsByDecade');
+        Route::get('countActors/',[ActorController::class, "countActors"])->name('countActors');
     });
 });
 

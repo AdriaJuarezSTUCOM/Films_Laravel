@@ -28,7 +28,26 @@
                 <button type="submit">Enviar</button>
             </form>
         </div>
-
+        <div>
+            <h1 class="mt-4">Lista de actores</h1>
+            <ul>
+                <li><a href=/actorout/actors>Actores</a></li>
+                <li><a href=/actorout/countActors>Contador de actores</a></li>
+            </ul>
+        </div>
+        <div>
+            <h1 class="mt-4">Búsqueda de actores</h1>
+            <ul>
+                <label>Selecciona la década:</label>
+                <select name="" id="">
+                    <option value="">1980-1989</option>
+                    <option value="">1990-1999</option>
+                    <option value="">2000-2009</option>
+                    <option value="">2010-2019</option>
+                </select>
+                <button type="submit">Enviar</button>
+            </ul>
+        </div>
 
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

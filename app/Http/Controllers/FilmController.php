@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 
 class FilmController extends Controller
@@ -11,8 +12,19 @@ class FilmController extends Controller
      * Read films from storage
      */
     public static function readFilms(): array {
-        $films = Storage::json('/public/films.json');
+
+        $origin = env('DATA_ORIGIN');
+
+        if($origin == "json"){
+            $films = Storage::json('/public/films.json');
+        }else if($origin == "database"){
+            $films = DB::table('films')->select("name", "year", "genre", "img_url", "country", "duration")->get()->map(function ($film) {
+                return (array) $film;
+            })->toArray();
+        }
+
         return $films;
+        
     }
     /**
      * List films older than input year 
