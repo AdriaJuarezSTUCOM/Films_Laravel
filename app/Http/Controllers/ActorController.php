@@ -1,16 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request;
 
 class ActorController extends Controller
 {
-    
+    public function readActors(){
+
+        $actors = DB::table("actors")->select("name")->get()->map(function ($actor) {
+            return (array) $actor;
+        })->toArray();
+
+        return $actors;
+    }
 
     public function listActors()
     {
         $title = "Listado de actores";
+
+        
 
         return view("actors.listActors", ["actors" => null, "title" => $title]);
     }

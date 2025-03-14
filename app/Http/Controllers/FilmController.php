@@ -13,18 +13,18 @@ class FilmController extends Controller
      */
     public static function readFilms(): array {
 
-        $origin = env('DATA_ORIGIN');
+        // Cargar películas del archivo JSON
+        $films = Storage::exists('/public/films.json') ? Storage::json('/public/films.json') : [];
 
-        if($origin == "json"){
-            $films = Storage::json('/public/films.json');
-        }else if($origin == "database"){
-            $films = DB::table('films')->select("name", "year", "genre", "img_url", "country", "duration")->get()->map(function ($film) {
-                return (array) $film;
-            })->toArray();
+        // Obtener películas de la base de datos
+        $filmsDB = DB::table('films')->select("name", "year", "genre", "img_url", "country", "duration")->get();
+
+        // Convertir objetos a arrays y fusionar con $films
+        foreach ($filmsDB as $film) {
+            $films[] = (array) $film;
         }
 
         return $films;
-        
     }
     /**
      * List films older than input year 
@@ -163,7 +163,7 @@ class FilmController extends Controller
     public function isFilm($name)
     {
         $films = FilmController::readFilms();
-        // Verificar si la película ya existe (basado en el título y el año)
+        // Verificar si la película ya existe
         foreach ($films as $film) {
             if (strtolower($film["name"]) === strtolower($name)) {
                 return true;
@@ -173,31 +173,75 @@ class FilmController extends Controller
     }
 
     public function createFilm(Request $request)
-{
-    // Leer las películas actuales
-    $films = FilmController::readFilms();
+    {
+        // Convertir la solicitud en un array
+        $newFilm = $request->toArray();
 
-    // Convertir la solicitud en un array
-    $newFilm = $request->toArray();
+        // Validaciones
+        if (
+            empty($newFilm['name']) || 
+            empty($newFilm['year']) || 
+            empty($newFilm['genre']) || 
+            empty($newFilm['img_url']) || 
+            empty($newFilm['country']) || 
+            empty($newFilm['duration'])
+        ) {
+            return view("welcome", ["status" => "Error: Todos los campos son obligatorios."]);
+        }
 
-    // Validar que el año esté en el rango 1900-2024
-    if ($newFilm["year"] < 1900 || $newFilm["year"] > 2024) {
-        return view("welcome", ["status" => "Error: El año debe estar entre 1900 y 2024."]);
+        if (!is_numeric($newFilm["year"]) || $newFilm["year"] < 1900 || $newFilm["year"] > 2024) {
+            return view("welcome", ["status" => "Error: El año debe estar entre 1900 y 2024."]);
+        }
+
+        if (!filter_var($newFilm["img_url"], FILTER_VALIDATE_URL)) {
+            return view("welcome", ["status" => "Error: La URL de la imagen no es válida."]);
+        }
+
+        if (!is_numeric($newFilm["duration"]) || $newFilm["duration"] <= 0) {
+            return view("welcome", ["status" => "Error: La duración debe ser un número positivo."]);
+        }
+
+        // Comprobar si la película ya existe en la fuente de datos actual
+        if (env('DATA_ORIGIN') == "json") {
+            
+            // Guardar peliculas del JSON
+            $films = json_decode(Storage::get('/public/films.json'), true) ?? [];
+            
+            // Verificar que no exista una película con el mismo nombre
+            foreach ($films as $film) {
+                if ($film['name'] === $newFilm['name']) {
+                    return view("welcome", ["status" => "Error: La película ya existe en el JSON."]);
+                }
+            }
+            
+            // Agregar la nueva película
+            $films[] = $newFilm;
+            
+            // Guardar el array actualizado en el archivo JSON
+            Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
+
+        } else if (env('DATA_ORIGIN') == "database") {
+
+            // Comprobar si la película ya existe en la base de datos
+            if (DB::table('films')->where('name', $newFilm["name"])->exists()) {
+                return view("welcome", ["status" => "Error: La película ya existe en la BD."]);
+            }
+
+            // Insertar en la base de datos
+            DB::table('films')->insert([
+                'name' => $newFilm['name'],
+                'year' => $newFilm['year'],
+                'genre' => $newFilm['genre'],
+                'img_url' => $newFilm['img_url'],
+                'country' => $newFilm['country'],
+                'duration' => $newFilm['duration'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return $this->listFilms();
     }
-
-    // Comprobar si la película existe
-    if ($this->isFilm($newFilm["name"])) {
-        return view("welcome", ["status" => "Error: La película ya existe."]);
-    }
-
-    // Agregar la nueva película
-    $films[] = $newFilm;
-
-    // Guardar el array actualizado en el archivo JSON
-    Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
-
-    return $this->listFilms();
-}
 
 
 }
