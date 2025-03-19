@@ -37,7 +37,7 @@ Route::middleware('year')->group(function() {
     Route::group(['prefix'=>'actorout'], function(){
         // Routes included with prefix "filmout"
         Route::get('actors/',[ActorController::class, "listActors"])->name('actors');
-        Route::get('listActorsByDecade/{year?}',[ActorController::class, "listActorsByDecade"])->name('listActorsByDecade');
+        Route::post('listActorsByDecade/{year?}',[ActorController::class, "listActorsByDecade"])->name('listActorsByDecade');
         Route::get('countActors/',[ActorController::class, "countActors"])->name('countActors');
     });
 });

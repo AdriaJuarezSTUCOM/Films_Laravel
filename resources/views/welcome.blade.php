@@ -38,14 +38,17 @@
         <div>
             <h1 class="mt-4">Búsqueda de actores</h1>
             <ul>
-                <label>Selecciona la década:</label>
-                <select name="" id="">
-                    <option value="">1980-1989</option>
-                    <option value="">1990-1999</option>
-                    <option value="">2000-2009</option>
-                    <option value="">2010-2019</option>
-                </select>
-                <button type="submit">Enviar</button>
+                <form style="padding: 0px" action="{{route("listActorsByDecade")}}" method="POST">
+                    {{csrf_field()}}
+                    <label>Selecciona la década:</label>
+                    <select name="year">
+                        <option value="1970" {{ request('year') == 1970 ? 'selected' : '' }}>1970-1979</option>
+                        <option value="1980" {{ request('year') == 1980 ? 'selected' : '' }}>1980-1989</option>
+                        <option value="1990" {{ request('year') == 1990 ? 'selected' : '' }}>1990-1999</option>
+                        <option value="2000" {{ request('year') == 2000 ? 'selected' : '' }}>2000-2009</option>
+                    </select>
+                    <button type="submit">Enviar</button>
+                </form>
             </ul>
         </div>
 
