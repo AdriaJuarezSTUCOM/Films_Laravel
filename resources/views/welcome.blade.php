@@ -28,7 +28,29 @@
                 <button type="submit">Enviar</button>
             </form>
         </div>
-
+        <div>
+            <h1 class="mt-4">Lista de actores</h1>
+            <ul>
+                <li><a href=/actorout/actors>Actores</a></li>
+                <li><a href=/actorout/countActors>Contador de actores</a></li>
+            </ul>
+        </div>
+        <div>
+            <h1 class="mt-4">Búsqueda de actores</h1>
+            <ul>
+                <form style="padding: 0px" action="{{route("listActorsByDecade")}}" method="POST">
+                    {{csrf_field()}}
+                    <label>Selecciona la década:</label>
+                    <select name="year">
+                        <option value="1970" {{ request('year') == 1970 ? 'selected' : '' }}>1970-1979</option>
+                        <option value="1980" {{ request('year') == 1980 ? 'selected' : '' }}>1980-1989</option>
+                        <option value="1990" {{ request('year') == 1990 ? 'selected' : '' }}>1990-1999</option>
+                        <option value="2000" {{ request('year') == 2000 ? 'selected' : '' }}>2000-2009</option>
+                    </select>
+                    <button type="submit">Enviar</button>
+                </form>
+            </ul>
+        </div>
 
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
