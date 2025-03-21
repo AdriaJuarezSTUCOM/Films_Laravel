@@ -243,5 +243,4 @@ class FilmController extends Controller
         return $this->listFilms();
     }
 
-
 }
