@@ -77,5 +77,14 @@ class ActorController extends Controller
             "status" => $deleted ? true : false
         ]);
     }
+public function index()
+    {
+        $actors = DB::table('actors')->select('id', 'name', 'surname', 'birthdate', 'country', 'img_url')->get();
 
+        return response()->json([
+            "action" => "index",
+            "status" => true,
+            "actors" => $actors
+        ]);
+    }
 }
