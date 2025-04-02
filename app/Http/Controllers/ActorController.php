@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -10,9 +11,8 @@ class ActorController extends Controller
 {
     public function readActors(){
 
-        $actors = DB::table("actors")->select("name", "surname", "birthdate", "country", "img_url")->get();
+        return Actor::select("name", "surname", "birthdate", "country", "img_url")->get();
 
-        return $actors;
     }
 
     public function listActors()
@@ -60,7 +60,7 @@ class ActorController extends Controller
 
     public function destroy($id)
     {
-        $actor = DB::table("actors")->where("id", $id)->first();
+        $actor = Actor::where("id", $id)->first();
 
         if (!$actor) {
             return response()->json([
@@ -70,7 +70,7 @@ class ActorController extends Controller
             ], 404);
         }
 
-        $deleted = DB::table("actors")->where("id", $id)->delete();
+        $deleted = Actor::where("id", $id)->delete();
 
         return response()->json([
             "action" => "delete",
@@ -79,7 +79,7 @@ class ActorController extends Controller
     }
 public function index()
     {
-        $actors = DB::table('actors')->select('id', 'name', 'surname', 'birthdate', 'country', 'img_url')->get();
+        $actors = Actor::select('id', 'name', 'surname', 'birthdate', 'country', 'img_url')->get();
 
         return response()->json([
             "action" => "index",
