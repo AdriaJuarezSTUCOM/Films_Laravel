@@ -9,8 +9,8 @@
         <table border="1" class="table">
             <tr>
                 @foreach($films as $film)
-                    @foreach(array_keys($film) as $key)
-                        <th>{{$key}}</th>
+                    @foreach(array_keys($film->getAttributes()) as $key)
+                        <th>{{ ucfirst(str_replace('_', ' ', $key)) }}</th>
                     @endforeach
                     @break
                 @endforeach
@@ -18,12 +18,12 @@
 
             @foreach($films as $film)
                 <tr>
-                    <td>{{$film['name']}}</td>
-                    <td>{{$film['year']}}</td>
-                    <td>{{$film['genre']}}</td>
-                    <td><img src={{$film['img_url']}} style="width: 100px; height: 120px;" /></td>
-                    <td>{{$film['country']}}</td>
-                    <td>{{$film['duration']}}</td>
+                    <td>{{$film->name}}</td>
+                    <td>{{$film->year}}</td>
+                    <td>{{$film->genre}}</td>
+                    <td><img src={{$film->img_url}} style="width: 100px; height: 120px;" /></td>
+                    <td>{{$film->country}}</td>
+                    <td>{{$film->duration}}</td>
                 </tr>
             @endforeach
         </table>
