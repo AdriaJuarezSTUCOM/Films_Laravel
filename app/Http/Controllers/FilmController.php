@@ -132,4 +132,14 @@ class FilmController extends Controller
 
         return $this->listFilms();
     }
+
+    public function index(){
+        $films = Film::all();
+
+        return response()->json([
+            "action" => "FilmsWithActors",
+            "status" => true,
+            "films" => $films
+        ]);
+    }
 }

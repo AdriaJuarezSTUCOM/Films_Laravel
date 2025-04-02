@@ -31,7 +31,7 @@ class ActorController extends Controller
 
         // Si no hay año en la petición, mostrar todos los actores
         if (!$year) {
-            $actors = DB::table("actors")->select("name", "surname", "birthdate", "country", "img_url")->get();
+            $actors = Actor::select("name", "surname", "birthdate", "country", "img_url")->get();
             return view('actors.listActors', ["actors" => $actors, "title" => $title]);
         }
 
@@ -40,8 +40,8 @@ class ActorController extends Controller
         $endYear = $year + 9;
 
         // Filtrar actores nacidos en la década
-        $actors = DB::table("actors")
-                    ->select("name", "surname", "birthdate", "country", "img_url")
+        $actors = Actor::
+                    select("name", "surname", "birthdate", "country", "img_url")
                     ->whereBetween('birthdate', ["$startYear-01-01", "$endYear-12-31"])
                     ->get();
 
@@ -79,7 +79,7 @@ class ActorController extends Controller
     }
 public function index()
     {
-        $actors = Actor::select('id', 'name', 'surname', 'birthdate', 'country', 'img_url')->get();
+        $actors = Actor::all();
 
         return response()->json([
             "action" => "index",
