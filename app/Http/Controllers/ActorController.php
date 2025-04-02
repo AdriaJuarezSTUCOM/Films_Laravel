@@ -79,7 +79,7 @@ class ActorController extends Controller
     }
 public function index()
     {
-        $actors = Actor::select('id', 'name', 'surname', 'birthdate', 'country', 'img_url')->get();
+        $actors = Actor::all();
 
         return response()->json([
             "action" => "index",
