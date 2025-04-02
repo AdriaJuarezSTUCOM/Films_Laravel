@@ -9,8 +9,8 @@
         <table border="1" class="table">
             <tr>
                 @foreach($actors as $actor)
-                    @foreach(array_keys((array) $actors[0]) as $key)
-                        <th>{{ ucfirst($key) }}</th>
+                    @foreach(array_keys($actor->getAttributes()) as $key)
+                        <th>{{ ucfirst(str_replace('_', ' ', $key)) }}</th>
                     @endforeach
                     @break
                 @endforeach
