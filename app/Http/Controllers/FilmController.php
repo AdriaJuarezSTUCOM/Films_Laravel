@@ -133,11 +133,12 @@ class FilmController extends Controller
         return $this->listFilms();
     }
 
-    public function index(){
-        $films = Film::all();
+    public function index()
+    {
+        $films = Film::with('actors')->get();
 
         return response()->json([
-            "action" => "FilmsWithActors",
+            "action" => "index",
             "status" => true,
             "films" => $films
         ]);

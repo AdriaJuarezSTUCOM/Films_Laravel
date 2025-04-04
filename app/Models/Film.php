@@ -25,4 +25,9 @@ class Film extends Model
         'img_url'
     ];
 
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class);
+    }
+
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actor;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ActorController extends Controller
@@ -77,9 +75,9 @@ class ActorController extends Controller
             "status" => $deleted ? true : false
         ]);
     }
-public function index()
+    public function index()
     {
-        $actors = Actor::all();
+        $actors = Actor::with('films')->get();
 
         return response()->json([
             "action" => "index",
