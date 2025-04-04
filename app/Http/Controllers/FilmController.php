@@ -132,4 +132,15 @@ class FilmController extends Controller
 
         return $this->listFilms();
     }
+
+    public function index()
+    {
+        $films = Film::with('actors')->get();
+
+        return response()->json([
+            "action" => "index",
+            "status" => true,
+            "films" => $films
+        ]);
+    }
 }
